@@ -1,0 +1,82 @@
+[
+  {
+    "file": "client_recommendations.txt",
+    "url": "/uploads/seed/client_recommendations.txt",
+    "type": "document",
+    "mime": "text/plain",
+    "name": "client_recommendations.txt",
+    "size": 380
+  },
+  {
+    "file": "design_system_spec.md",
+    "url": "/uploads/seed/design_system_spec.md",
+    "type": "document",
+    "mime": "text/plain",
+    "name": "design_system_spec.md",
+    "size": 292
+  },
+  {
+    "file": "landscape_photo.jpg",
+    "url": "/uploads/seed/landscape_photo.jpg",
+    "type": "image",
+    "mime": "image/jpeg",
+    "name": "landscape_photo.jpg",
+    "size": 8952
+  },
+  {
+    "file": "loading_animation.gif",
+    "url": "/uploads/seed/loading_animation.gif",
+    "type": "gif",
+    "mime": "image/gif",
+    "name": "loading_animation.gif",
+    "size": 42
+  },
+  {
+    "file": "mountains_photo.jpg",
+    "url": "/uploads/seed/mountains_photo.jpg",
+    "type": "image",
+    "mime": "image/jpeg",
+    "name": "mountains_photo.jpg",
+    "size": 64487
+  },
+  {
+    "file": "portfolio_overview.txt",
+    "url": "/uploads/seed/portfolio_overview.txt",
+    "type": "document",
+    "mime": "text/plain",
+    "name": "portfolio_overview.txt",
+    "size": 488
+  },
+  {
+    "file": "portrait_photo.png",
+    "url": "/uploads/seed/portrait_photo.png",
+    "type": "image",
+    "mime": "image/png",
+    "name": "portrait_photo.png",
+    "size": 9821
+  },
+  {
+    "file": "README.md",
+    "url": "/uploads/seed/README.md",
+    "type": "document",
+    "mime": "text/plain",
+    "name": "README.md",
+    "size": 616
+  },
+  {
+    "file": "reference_guide.pdf",
+    "url": "/uploads/seed/reference_guide.pdf",
+    "type": "document",
+    "mime": "application/pdf",
+    "name": "reference_guide.pdf",
+    "size": 13264
+  },
+  {
+    "file": "sample_video.mp4",
+    "url": "/uploads/seed/sample_video.mp4",
+    "type": "video",
+    "mime": "video/mp4",
+    "name": "sample_video.mp4",
+    "size": 788493
+  }
+]

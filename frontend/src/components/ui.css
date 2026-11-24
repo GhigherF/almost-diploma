@@ -1,0 +1,397 @@
+/* Unified UI: icons, buttons, search, profile lists */
+
+.ui-icon-svg {
+  display: block;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+a.ui-btn-icon {
+  text-decoration: none;
+  color: inherit;
+}
+
+.ui-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ui-btn-icon:hover:not(:disabled) {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: var(--shadow-light);
+}
+
+.ui-btn-icon.is-active {
+  color: var(--like);
+  border-color: var(--like);
+  background: var(--like-bg);
+}
+
+.ui-btn-icon:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ui-btn-icon-text {
+  font-size: 13px;
+}
+
+.ui-btn-icon--danger:hover:not(:disabled) {
+  color: var(--danger);
+  border-color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.ui-btn-icon--plain {
+  border: none;
+  background: transparent;
+  padding: 6px;
+}
+
+.ui-btn-icon--plain:hover:not(:disabled) {
+  background: var(--bg-hover);
+  transform: scale(1.08);
+  box-shadow: none;
+}
+
+.ui-btn-icon--compact {
+  padding: 5px 8px;
+  font-size: 12px;
+  gap: 4px;
+}
+
+/* Лайк / комментарии — компактные кнопки */
+.btn-like,
+.btn-comments,
+.btn-delete-post,
+.btn-like-comment {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 32px;
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-like,
+.btn-like-comment {
+  overflow: visible;
+  min-width: 0;
+  padding: 6px 10px;
+}
+
+.btn-like .ui-icon-svg,
+.btn-comments .ui-icon-svg,
+.btn-like-comment .ui-icon-svg {
+  width: 16px !important;
+  height: 16px !important;
+  flex: 0 0 16px;
+  overflow: visible;
+}
+
+.btn-like .like-count,
+.btn-comments .comment-count,
+.btn-like-comment .like-count {
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0;
+  min-width: 0.5em;
+}
+
+.btn-like:hover,
+.btn-like.liked,
+.btn-like-comment:hover,
+.btn-like-comment.liked {
+  color: var(--like);
+  border-color: var(--like);
+  background: var(--like-bg);
+}
+
+.btn-comments:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.btn-delete-post {
+  color: var(--danger);
+}
+
+.btn-delete-post:hover {
+  border-color: var(--danger);
+  background: var(--danger-bg);
+}
+
+/* Панель: копировать ссылку / открыть пост */
+.post-toolbar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.post-toolbar .post-date {
+  margin-left: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.post-toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  color: var(--text);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.post-toolbar-btn .ui-icon-svg {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+.post-toolbar-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  color: var(--accent);
+  transform: scale(1.06);
+  text-decoration: none;
+}
+
+/* Модалка: кнопка скачать */
+.overlay .btn-download,
+.overlay .btn-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.overlay .btn-download {
+  min-width: 132px;
+  padding: 10px 28px;
+}
+
+.profile-post-stat {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  gap: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.profile-post-stat .ui-icon-svg {
+  width: 13px !important;
+  height: 13px !important;
+  flex-shrink: 0;
+}
+
+.profile-post-card-actions .ui-btn-icon {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+/* Profile search — единый стиль */
+.profile-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-search-bar:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.profile-search-bar .ui-icon-svg {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.profile-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+  min-width: 0;
+}
+
+.profile-search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.profile-search-clear {
+  padding: 4px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  transition: color 0.2s, transform 0.2s, background 0.2s;
+}
+
+.profile-search-clear:hover {
+  color: var(--text);
+  background: var(--bg-hover);
+  transform: scale(1.1);
+}
+
+/* Единая карточка поста в профиле (лайки / просмотры) */
+.profile-post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-post-card {
+  padding: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.profile-post-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-hover);
+}
+
+.profile-post-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.profile-post-card-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-post-card-author {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.profile-post-card-author:hover {
+  color: var(--accent);
+}
+
+.profile-post-card-date {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 2px;
+}
+
+.profile-post-card-body {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+  margin-bottom: 12px;
+  word-break: break-word;
+}
+
+.profile-post-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-post-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: color 0.2s, background 0.2s;
+}
+
+.profile-post-stat .ui-icon-svg {
+  opacity: 0.85;
+}
+
+.profile-post-stat:hover {
+  color: var(--text);
+  background: var(--bg-hover);
+}
+
+.profile-sidebar-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.profile-sidebar-btn:hover .profile-sidebar-icon-wrap,
+.profile-sidebar-btn.active .profile-sidebar-icon-wrap {
+  transform: scale(1.12);
+  color: var(--accent);
+}
+
+.auth-forgot-banner {
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.auth-forgot-banner a {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.auth-forgot-banner a:hover {
+  text-decoration: underline;
+}

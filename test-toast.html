@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тест Toast</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background: #f5f5f5;
+        }
+        button {
+            padding: 12px 24px;
+            background: #4dabf7;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background: #339af0;
+        }
+        .info {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Тест Toast уведомлений</h1>
+    
+    <div>
+        <button onclick="testToast()">Тест Toast</button>
+        <button onclick="openSite()">Открыть сайт</button>
+        <button onclick="checkConsole()">Проверить консоль</button>
+    </div>
+
+    <div class="info">
+        <h3>Инструкция:</h3>
+        <ol>
+            <li>Откройте сайт (https://localhost)</li>
+            <li>Откройте консоль браузера (F12)</li>
+            <li>Создайте новый пост</li>
+            <li>Нажмите "Опубликовать"</li>
+            <li>В консоли должны появиться логи:
+                <pre>[POST] Вызов toast...
+[TOAST] Showing: Пост опубликован ✓
+[TOAST] Current toasts: 1</pre>
+            </li>
+            <li>Сверху по центру должно появиться синее уведомление</li>
+        </ol>
+
+        <h3>Если toast не появляется:</h3>
+        <ul>
+            <li>Проверьте консоль на ошибки</li>
+            <li>Убедитесь, что z-index: 10000</li>
+            <li>Проверьте, что ToastProvider обернут вокруг приложения</li>
+            <li>Очистите кэш браузера (Ctrl+Shift+R)</li>
+        </ul>
+    </div>
+
+    <script>
+        function testToast() {
+            alert('Откройте сайт и проверьте toast там');
+        }
+
+        function openSite() {
+            window.open('https://localhost', '_blank');
+        }
+
+        function checkConsole() {
+            console.log('[TEST] Консоль работает!');
+            alert('Проверьте консоль браузера (F12)');
+        }
+    </script>
+</body>
+</html>
