@@ -44,8 +44,8 @@ async function enrichPosts(pool, posts, viewerId) {
 }
 
 async function getPosts(pool, authHeader, includeViewed = false, limit = 20, offset = 0) {
-  const viewerId = authHeader
-    ? (() => { try { return jwt.verify(authHeader.slice(7), process.env.JWT_SECRET).user_id; } catch { return null; } })()
+  const viewerId 
+    ?(() => { try { return jwt.verify(authHeader.slice(7), process.env.JWT_SECRET).user_id; } catch { return null; } })()
     : null;
 
   console.log('[POSTS] Запрос постов, viewerId:', viewerId, 'includeViewed:', includeViewed, 'limit:', limit, 'offset:', offset);
@@ -62,17 +62,17 @@ async function getPosts(pool, authHeader, includeViewed = false, limit = 20, off
   let query = `SELECT p.*, u.nick AS username, u.avatar_url AS user_avatar
      FROM posts p JOIN users u ON p.user_id = u.id
      WHERE p.deleted = FALSE`;
-  
+
   const params = [];
-  
+
   if (viewerId && !includeViewed) {
     params.push(viewerId);
     query += ` AND p.user_id != $${params.length}`;
-    
+
     params.push(viewerId);
     query += ` AND p.id NOT IN (SELECT post_id FROM post_views WHERE user_id = $${params.length})`;
   }
-  
+
   params.push(limit);
   params.push(offset);
   query += ` ORDER BY p.created_at DESC LIMIT $${params.length - 1} OFFSET $${params.length}`;
@@ -126,7 +126,7 @@ async function createPost(pool, userId, body, files, resolveFileType) {
   if (userRows[0]?.banned) {
     throw { status: 403, message: 'Ваш аккаунт заблокирован. Вы не можете публиковать посты.' };
   }
-  
+
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
@@ -141,7 +141,7 @@ async function createPost(pool, userId, body, files, resolveFileType) {
         `INSERT INTO post_files (post_id, file_url, file_type, original_name, mime_type, size_bytes)
          VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
         [post.id, `/uploads/${file.filename}`, resolveFileType(file.mimetype),
-         decodeUploadOriginalName(file.originalname), file.mimetype, file.size]
+        decodeUploadOriginalName(file.originalname), file.mimetype, file.size]
       );
       savedFiles.push(fr[0]);
     }
@@ -170,17 +170,17 @@ async function updatePost(pool, postId, userId, newBody, filesToDelete = []) {
   if (post.user_id !== userId) {
     throw { status: 403, message: 'Вы можете редактировать только свои посты' };
   }
-  
+
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
-    
+
     // Обновляем текст поста
     const { rows: updated } = await client.query(
       'UPDATE posts SET body = $1, updated_at = NOW() WHERE id = $2 RETURNING *',
       [newBody, postId]
     );
-    
+
     // Удаляем файлы если указаны
     if (filesToDelete && filesToDelete.length > 0) {
       await client.query(
@@ -188,7 +188,7 @@ async function updatePost(pool, postId, userId, newBody, filesToDelete = []) {
         [filesToDelete, postId]
       );
     }
-    
+
     await client.query('COMMIT');
     return updated[0];
   } catch (err) {

@@ -1,4 +1,4 @@
-package main
+package handlers
 
 import (
 	"net/http"
@@ -8,7 +8,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-func getPosts(db *pgxpool.Pool) gin.HandlerFunc {
+func GetPosts(db *pgxpool.Pool) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		limit, _ := strconv.Atoi(c.DefaultQuery("limit", "20"))
 		offset, _ := strconv.Atoi(c.DefaultQuery("offset", "0"))
@@ -43,7 +43,6 @@ func getPosts(db *pgxpool.Pool) gin.HandlerFunc {
 		defer rows.Close()
 
 		fields := rows.FieldDescriptions()
-
 		posts := make([]map[string]interface{}, 0)
 
 		for rows.Next() {
@@ -78,14 +77,59 @@ func getPosts(db *pgxpool.Pool) gin.HandlerFunc {
 	}
 }
 
-func main() {
-	db, err := ConnectDB()
-	if err != nil {
-		panic(err)
+func GetPostById(db *pgxpool.Pool) gin.HandlerFunc {
+	return func(context *gin.Context) {
+		id, err := strconv.Atoi(context.Param("id"))
+
+		if err != nil || id <= 0 {
+			context.JSON(http.StatusBadRequest, gin.H{
+				"error": "Invalid post id",
+			})
+			return
+		}
+
+		query := `
+            SELECT
+                p.*,
+                u.nick AS username,
+                u.avatar_url AS user_avatar
+            FROM posts p
+            JOIN users u ON p.user_id = u.id
+            WHERE p.deleted = FALSE	AND p.id = $1    
+		`
+		row, err := db.Query(context.Request.Context(), query, id)
+		if err != nil {
+			context.JSON(http.StatusInternalServerError, gin.H{
+				"error": err.Error(),
+			})
+			return
+		}
+		defer row.Close()
+
+		if !row.Next() {
+			context.JSON(http.StatusNotFound, gin.H{
+				"error": "Пост не найден",
+			})
+			return
+		}
+
+		values, err := row.Values()
+		if err != nil {
+			context.JSON(http.StatusInternalServerError, gin.H{
+				"error": err.Error(),
+			})
+			return
+		}
+		fields := row.FieldDescriptions()
+		post := make(map[string]interface{})
+
+		for i, field := range fields {
+			post[string(field.Name)] = values[i]
+		}
+
+		context.JSON(http.StatusOK, gin.H{
+			"post": post,
+		})
+		return
 	}
-
-	router := gin.Default()
-	router.GET("/hello", getPosts(db))
-
-	router.Run(":3000")
 }
